@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -28,10 +28,10 @@
 
   /* Shadows */
   --shadow-primary: 0 0.5rem 2rem #1c1c1c25;
-  --shadow-color: 0 0.5rem 1.5rem #d4af3729;
+  --shadow-color: 0 0.5rem 1.5rem #d4af371f;
 
   /* Borders */
-  --color-border: #e0d9c8;
+  --border: #e0d9c8;
 
   /* Z-indexes */
   --z-header: 1000;
@@ -45,11 +45,11 @@
 .dark {
   /* Brand Colors */
   --color-primary: #b07c4c;
-  --color-accent: #c29469;
+  --color-accent: #d3a070;
   --color-muted: #99999949;
 
   /* UI Backgrounds */
-  --color-bg: #0b0d15;
+  --color-bg: #101426;
   --color-bg-secondary: #1a243f;
   --color-bg-hover: #2a2a2a;
   --color-bg-footer: #0a0a0a;
@@ -67,15 +67,15 @@
 
   /* Shadows */
   --shadow-primary: 0 0.5rem 1.5rem #00000040;
-  --shadow-color: 0 0.5rem 1.5rem #ffd70029;
+  --shadow-color: 0 0.5rem 1.5rem #ffd90016;
 
   /* Borders */
-  --color-border: #3d3729;
+  --border: #3d3729;
 }
 *,
 ::after,
 ::before {
-  font-family: "Sansation", sans-serif;
+  font-family: "Noto Serif", serif;
   box-sizing: border-box;
 }
 body {

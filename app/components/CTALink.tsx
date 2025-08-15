@@ -25,7 +25,7 @@ export default function CTALink({
 
   const variantClasses = {
     primary:
-      "bg-[var(--color-primary)] hover:bg-[var(--color-accent)] text-[var(--color-text-on-primary)] shadow-[var(--shadow-color)]",
+      "bg-[var(--color-primary)] text-[var(--color-text-on-primary)] border border-transparent hover:bg-transparent hover:border-[var(--color-primary)] hover:text-[var(--color-text-primary)]",
     secondary:
       "bg-[var(--color-secondary)] hover:bg-[var(--color-primary)] text-[var(--color-text-on-primary)]",
     outline:
