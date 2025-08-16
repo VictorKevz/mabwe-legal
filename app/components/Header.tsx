@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import CTALink from "./CTALink";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -30,9 +31,11 @@ export default function Header() {
     <div className="w-full sticky top-0 z-100">
       <nav className="w-full flex items-center justify-between relative h-[4.5rem] md:h-[5.5rem] bg-[var(--color-bg-secondary)] border-b border-[var(--border)] px-4 md:px-6 z-100">
         <Link href="/" className="flex items-center gap-1">
-          <img
+          <Image
             src={`/logo-${theme}.svg`}
             alt="Mabwe Logo"
+            width={40}
+            height={40}
             className="min-w-8 w-10 h-auto"
           />
           <span className="text-lg lg:text-2xl min-w-max text-[var(--color-text-primary)] font-extrabold">
