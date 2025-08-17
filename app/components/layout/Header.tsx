@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import CTALink from "./CTALink";
+import CTALink from "../ui/CTALink";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../../contexts/ThemeContext";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <div className="w-full sticky top-0 z-100">
-      <nav className="w-full flex items-center justify-between relative h-[4.5rem] md:h-[5.5rem] bg-[var(--color-bg-secondary)] border-b border-[var(--border)] px-4 md:px-6 z-100">
+      <nav className="w-full flex items-center justify-between relative h-[4.5rem] md:h-[5.5rem] bg-[var(--color-bg-secondary)] px-4 md:px-6 z-100">
         <Link href="/" className="flex items-center gap-1">
           <Image
             src={`/logo-${theme}.svg`}
@@ -77,9 +77,9 @@ export default function Header() {
             />
           </li>
         </ul>
-        <div className="flex items-center justify-end max-w-[15rem] w-full gap-3">
+        <div className="max-w-[15rem] w-full flex justify-end">
           <CTALink
-            text="Book Appointment"
+            text="Get Legal Help"
             href="/contact"
             variant="primary"
             className="!hidden lg:!flex min-h-12 w-fit lg:max-w-[12rem] lg:w-full"

@@ -21,7 +21,7 @@ export default function CTALink({
   rel,
 }: CTALinkProps) {
   const baseClasses =
-    "rounded-lg font-semibold text-center transition-all duration-300 inline-flex items-center justify-center no-underline";
+    "w-full h-12 rounded-lg font-semibold text-center transition-all duration-300 inline-flex items-center justify-center no-underline";
 
   const variantClasses = {
     primary:

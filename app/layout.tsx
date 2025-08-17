@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ClientLayout from "./components/ClientLayout";
+import ClientLayout from "./components/layout/ClientLayout";
 
 export const metadata: Metadata = {
-  title: "LawFirm - Expert Legal Services",
+  title: "Mabwe Legal - LawFirm Expert Legal Services",
   description:
     "Professional legal services with integrity, expertise, and dedication. Get expert legal consultation for corporate, criminal, family, and personal injury law.",
 };

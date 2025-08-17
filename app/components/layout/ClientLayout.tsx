@@ -1,9 +1,9 @@
 "use client";
 
-import { ThemeProvider } from "../contexts/ThemeContext";
+import { ThemeProvider } from "../../contexts/ThemeContext";
 import Header from "./Header";
 import Footer from "./Footer";
-import { FloatingButton } from "./FloatButton";
+import { FloatingButton } from "../ui/FloatButton";
 
 export default function ClientLayout({
   children,
