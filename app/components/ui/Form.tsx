@@ -3,21 +3,123 @@ import {
   EmptyFormState,
   FormField,
   FormState,
-  FieldProps,
   OnChangeType,
 } from "@/app/types/form";
 import React, { useCallback, useState } from "react";
+import { InputField } from "./InputField";
+import { MessageField } from "./MessageField";
 
 export const Form = () => {
   const [form, setForm] = useState<FormState>(EmptyFormState);
+  const [errors, setErrors] = useState<FormState>(EmptyFormState);
 
-  const handleChange = useCallback((e: OnChangeType) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }, []);
+  const handleChange = useCallback(
+    (e: OnChangeType) => {
+      const { name, value } = e.target;
+      setForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+
+      if (errors[name as keyof FormState]) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: "",
+        }));
+      }
+    },
+    [errors]
+  );
+
+  const handleValidation = (): boolean => {
+    const newErrors: FormState = { ...EmptyFormState };
+
+    for (const [fieldName, fieldValue] of Object.entries(form)) {
+      const key = fieldName as keyof FormState;
+      const value = fieldValue.trim();
+
+      // Common validation: required field
+      if (!value) {
+        newErrors[key] = `${
+          fieldName.charAt(0).toUpperCase() +
+          fieldName.slice(1).replace(/([A-Z])/g, " $1")
+        } is required`;
+        setErrors(newErrors);
+        return false;
+      }
+
+      // Field-specific validation
+      switch (key) {
+        case "firstName":
+        case "lastName":
+          if (value.length < 2) {
+            newErrors[key] = `${
+              key === "firstName" ? "First" : "Last"
+            } name must be at least 2 characters`;
+            setErrors(newErrors);
+            return false;
+          }
+          if (!/^[a-zA-Z\s'-]+$/.test(value)) {
+            newErrors[key] = `${
+              key === "firstName" ? "First" : "Last"
+            } name can only contain letters, spaces, apostrophes, and hyphens`;
+            setErrors(newErrors);
+            return false;
+          }
+          break;
+
+        case "email":
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            newErrors[key] = "Please enter a valid email address";
+            setErrors(newErrors);
+            return false;
+          }
+          break;
+
+        case "phone":
+          const phoneDigits = value.replace(/\D/g, "");
+          if (phoneDigits.length < 10) {
+            newErrors[key] = "Phone number must be at least 10 digits";
+            setErrors(newErrors);
+            return false;
+          }
+          if (phoneDigits.length > 15) {
+            newErrors[key] = "Phone number cannot exceed 15 digits";
+            setErrors(newErrors);
+            return false;
+          }
+          break;
+
+        case "message":
+          if (value.length < 10) {
+            newErrors[key] = "Message must be at least 10 characters";
+            setErrors(newErrors);
+            return false;
+          }
+          if (value.length > 1000) {
+            newErrors[key] = "Message cannot exceed 1000 characters";
+            setErrors(newErrors);
+            return false;
+          }
+          break;
+      }
+    }
+
+    // All validations passed
+    setErrors(newErrors);
+    return true;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (handleValidation()) {
+      console.log("Form submitted:", form);
+    } else {
+      console.log("Form has errors:", errors);
+    }
+  };
 
   const formData: FormField[] = [
     {
@@ -42,11 +144,11 @@ export const Form = () => {
       id: "email-03",
     },
     {
-      value: form.whatsApp,
-      name: "whatsApp",
-      label: "WhatsApp Number",
+      value: form.phone,
+      name: "phone",
+      label: "Phone Number",
       placeholder: "(263) 771 154 299",
-      id: "whatsAppNum-04",
+      id: "phoneNum-04",
     },
     {
       value: form.message,
@@ -57,7 +159,10 @@ export const Form = () => {
     },
   ];
   return (
-    <form className="max-w-xl w-full glass-card py-6 px-5">
+    <form
+      className="max-w-xl w-full glass-card py-6 px-5"
+      onSubmit={handleSubmit}
+    >
       <header>
         <h2 className="text-2xl lg:text-4xl text-[var(--color-text-on-primary)]!">
           Here to Help
@@ -73,9 +178,17 @@ export const Form = () => {
             className={`w-full ${field.name === "message" && "col-span-2"}`}
           >
             {field.name === "message" ? (
-              <MessageField field={field} onChange={handleChange} />
+              <MessageField
+                field={field}
+                onChange={handleChange}
+                error={errors[field.name as keyof FormState]}
+              />
             ) : (
-              <InputField field={field} onChange={handleChange} />
+              <InputField
+                field={field}
+                onChange={handleChange}
+                error={errors[field.name as keyof FormState]}
+              />
             )}
           </div>
         ))}
@@ -89,44 +202,5 @@ export const Form = () => {
         </button>
       </div>
     </form>
-  );
-};
-
-const InputField = ({ field, onChange }: FieldProps) => {
-  return (
-    <div className="w-full flex flex-col">
-      <label htmlFor={field.name} className="font-semibold mb-1">
-        {field.label}{" "}
-        <span className="text-[var(--color-error)] opacity-80">*</span>
-      </label>
-      <input
-        type="text"
-        value={field.value}
-        onChange={onChange}
-        name={field.name}
-        id={field.name}
-        placeholder={field.placeholder}
-        className="w-full bg-[var(--color-bg-secondary)] h-12 rounded-lg border border-[var(--border)] pl-4"
-      />
-    </div>
-  );
-};
-const MessageField = ({ field, onChange }: FieldProps) => {
-  return (
-    <div className="w-full flex flex-col">
-      <label htmlFor={field.name} className="font-semibold mb-1">
-        {field.label}{" "}
-        <span className="text-[var(--color-error)] opacity-80">*</span>
-      </label>
-      <textarea
-        value={field.value}
-        onChange={onChange}
-        name={field.name}
-        id={field.name}
-        placeholder={field.placeholder}
-        rows={3}
-        className="resize-none bg-[var(--color-bg-secondary)] w-full pl-5 pt-4 rounded-lg border border-[var(--border)]"
-      ></textarea>
-    </div>
   );
 };

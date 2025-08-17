@@ -14,6 +14,7 @@
   --color-bg-hover: #f4f1eb;
   --color-bg-footer: #1c1c1c;
   --color-overlay: #29241836;
+  --color-bg-faded: #949fc033;
 
   /* Text */
   --color-text-primary: #1a243f;
@@ -53,6 +54,7 @@
   --color-bg-secondary: #1a243f;
   --color-bg-hover: #2a2a2a;
   --color-bg-footer: #0a0a0a;
+  --color-bg-faded: #2c385b4f;
 
   /* Text */
   --color-text-primary: #fdfdfd;

@@ -4,14 +4,14 @@ export type FormState = {
   firstName: string;
   lastName: string;
   email: string;
-  whatsApp: string;
+  phone: string;
   message: string;
 };
 export const EmptyFormState: FormState = {
   firstName: "",
   lastName: "",
   email: "",
-  whatsApp: "",
+  phone: "",
   message: "",
 };
 export type FormField = {
@@ -27,4 +27,5 @@ export type OnChangeType =
 export type FieldProps = {
   field: FormField;
   onChange: (e: OnChangeType) => void;
+  error?: string;
 };
