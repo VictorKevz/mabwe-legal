@@ -2,15 +2,15 @@ import React from "react";
 import Image from "next/image";
 import CTALink from "../ui/CTALink";
 import { Form } from "../ui/Form";
-import { HeroClient, AnimatedContent } from "./HeroClient";
+import { HeroAnimationWrapper, AnimatedContent } from "./HeroClient";
 
 export const Hero = () => {
   return (
-    <section className="w-full flex items-center justify-center min-h-[calc(100dvh-5.5rem)] px-4 md:px-6 relative z-20">
-      <HeroClient>
-        <div className="max-w-xl w-full flex flex-col items-start p-6 rounded-lg">
+    <section className="w-full flex items-center justify-center min-h-[calc(100dvh-5.5rem)] px-4 lg:px-6 py-12 lg:py-5 relative z-20">
+      <HeroAnimationWrapper>
+        <div className="max-w-xl w-full flex flex-col items-start rounded-lg">
           <AnimatedContent variant="fadeInUp">
-            <h1 className="text-2xl sm:text-4xl font-bold text-[var(--color-text-on-primary)]!">
+            <h1 className="text-3xl md:text-5xl font-bold text-[var(--color-text-on-primary)]!">
               Trusted Legal Solutions <br className="hidden sm:block" /> for
               Life's Challenges
             </h1>
@@ -38,7 +38,7 @@ export const Hero = () => {
         <AnimatedContent variant="fadeIn">
           <Form />
         </AnimatedContent>
-      </HeroClient>
+      </HeroAnimationWrapper>
       <picture className="absolute inset-0 -z-10 w-full h-full pointer-events-none opacity-95">
         <source
           media="(min-width:1024px )"

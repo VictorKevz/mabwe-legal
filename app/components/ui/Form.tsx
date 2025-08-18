@@ -160,7 +160,7 @@ export const Form = () => {
   ];
   return (
     <form
-      className="max-w-xl w-full glass-card py-6 px-5"
+      className="max-w-xl w-full flex flex-col glass-card py-6 px-5 mx-auto lg:justify-end"
       onSubmit={handleSubmit}
     >
       <header>
@@ -171,11 +171,15 @@ export const Form = () => {
           Fill out the form below and we’ll get back to you soon.
         </p>
       </header>
-      <fieldset className="w-full grid md:grid-cols-2 gap-5 mt-4">
+      <fieldset className="w-full grid lg:grid-cols-2 gap-5 mt-4">
         {formData.map((field) => (
           <div
             key={field.id}
-            className={`w-full ${field.name === "message" && "col-span-2"}`}
+            className={`w-full ${
+              field.name === "message"
+                ? "col-span-2"
+                : "col-span-2 lg:col-span-1"
+            }`}
           >
             {field.name === "message" ? (
               <MessageField

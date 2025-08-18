@@ -91,7 +91,6 @@ h4 {
   line-height: 1.25;
   color: var(--color-text-primary);
   font-family: "Noto Serif", serif !important;
-  text-transform: uppercase;
 }
 button,
 a {
@@ -151,5 +150,15 @@ textarea:hover {
   border: 1px solid var(--border);
   border-radius: 0.75rem;
   background-color: var(--color-overlay);
-  box-shadow: 0 1rem 2rem #00000040;
+}
+.glass-card:hover,
+.card:hover {
+  box-shadow: 0 1rem 2rem #dec1691a;
+  transform: translateY(-0.5rem);
+  transition: var(--transition-default);
+}
+.card {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background-color: var(--color-bg-secondary);
 }
