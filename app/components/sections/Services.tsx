@@ -2,6 +2,7 @@ import { serviceInfo, services } from "@/data/services";
 import Link from "next/link";
 import React from "react";
 import CTALink from "../ui/CTALink";
+import { ArrowForward } from "@mui/icons-material";
 
 export const Services = () => {
   return (
@@ -12,9 +13,12 @@ export const Services = () => {
           <p className="max-w-xl">{serviceInfo.description}</p>
         </header>
         <div className="max-w-screen-xl w-full flex flex-col items-center mt-12">
-          <div className="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5 justify-between">
+          <div className="w-full grid sm:grid-cols-2 xl:grid-cols-3 gap-5 justify-between">
             {services.slice(0, 6).map((service) => (
-              <article key={service.title} className="card p-6">
+              <article
+                key={service.title}
+                className="card px-6 pt-6 pb-4 w-full"
+              >
                 <header className="flex items-center gap-1">
                   <span className="min-h-10 min-w-10 bg-[var(--color-warning)] flex items-center justify-center text-[var(--color-text-on-primary)] rounded-md">
                     <service.icon />
@@ -30,6 +34,14 @@ export const Services = () => {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-5">
+                  <CTALink
+                    text="Learn More"
+                    href="/services"
+                    variant="outline"
+                    icon={ArrowForward}
+                  />
+                </div>
               </article>
             ))}
           </div>
@@ -42,6 +54,7 @@ export const Services = () => {
               href="/services"
               variant="primary"
               className="max-w-[15rem]"
+              icon={ArrowForward}
             />
           </div>
         </div>

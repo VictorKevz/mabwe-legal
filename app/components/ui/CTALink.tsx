@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { SvgIconComponent } from "@mui/icons-material";
 
 interface CTALinkProps {
   text: string;
@@ -9,6 +10,7 @@ interface CTALinkProps {
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   target?: string;
   rel?: string;
+  icon?: SvgIconComponent;
 }
 
 export default function CTALink({
@@ -19,6 +21,7 @@ export default function CTALink({
   onClick,
   target,
   rel,
+  icon,
 }: CTALinkProps) {
   const baseClasses =
     "w-full h-12 rounded-lg font-semibold text-center transition-all duration-300 inline-flex items-center justify-center no-underline";
@@ -29,7 +32,7 @@ export default function CTALink({
     secondary:
       "bg-[var(--color-secondary)] hover:bg-[var(--color-primary)] text-[var(--color-text-on-primary)]",
     outline:
-      "border-2 border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-text-on-primary)]",
+      "border border-[var(--color-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-text-on-primary)]",
   };
 
   const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${className}`;
@@ -43,6 +46,7 @@ export default function CTALink({
       rel={rel}
     >
       {text}
+      {icon && React.createElement(icon, { style: { marginLeft: 8 } })}
     </Link>
   );
 }

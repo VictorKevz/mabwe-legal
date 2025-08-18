@@ -151,7 +151,7 @@ textarea:hover {
   border-radius: 0.75rem;
   background-color: var(--color-overlay);
 }
-.glass-card:hover,
+
 .card:hover {
   box-shadow: 0 1rem 2rem #dec1691a;
   transform: translateY(-0.5rem);
