@@ -1,20 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { FadeInUpVariants, FadeInVariants } from "../../variants";
+import { useIsHydrated } from "../../hooks/useIsHydrated";
 
 interface HeroClientProps {
   children: React.ReactNode;
 }
 
-// This component only adds animation wrapper without affecting content
 export const HeroAnimationWrapper = ({ children }: HeroClientProps) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isHydrated = useIsHydrated();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -27,9 +23,7 @@ export const HeroAnimationWrapper = ({ children }: HeroClientProps) => {
     },
   };
 
-  // Render children without animation wrapper on server
-  // Add animation only after client hydration
-  if (!isMounted) {
+  if (!isHydrated) {
     return (
       <div className="max-w-screen-xl w-full flex flex-col lg:flex-row items-center justify-center gap-5">
         {children}
@@ -49,29 +43,21 @@ export const HeroAnimationWrapper = ({ children }: HeroClientProps) => {
   );
 };
 
-// Progressive enhancement: content is visible immediately, animation is added progressively
-interface AnimatedContentProps {
-  children: React.ReactNode;
-  variant?: "fadeInUp" | "fadeIn";
-}
 export const AnimatedContent = ({
   children,
   variant = "fadeInUp",
-}: AnimatedContentProps) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+}: {
+  children: React.ReactNode;
+  variant?: "fadeInUp" | "fadeIn";
+}) => {
+  const isHydrated = useIsHydrated();
 
   const variants = variant === "fadeInUp" ? FadeInUpVariants : FadeInVariants;
 
-  // Render content immediately without motion wrapper on server
-  if (!isMounted) {
+  if (!isHydrated) {
     return <div className="w-full">{children}</div>;
   }
 
-  // Add animation only after hydration
   return (
     <motion.div className="w-full" variants={variants}>
       {children}

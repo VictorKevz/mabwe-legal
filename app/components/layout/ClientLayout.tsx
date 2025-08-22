@@ -16,7 +16,7 @@ export default function ClientLayout({
         <Header />
         <main className="">{children}</main>
         <FloatingButton />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </ThemeProvider>
   );
