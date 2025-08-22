@@ -3,12 +3,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FadeInUpVariants, FadeInVariants } from "../../variants";
+import { useIsHydrated } from "../../hooks/useIsHydrated";
 
 interface HeroClientProps {
   children: React.ReactNode;
 }
 
-export const HeroClient = ({ children }: HeroClientProps) => {
+export const HeroAnimationWrapper = ({ children }: HeroClientProps) => {
+  const isHydrated = useIsHydrated();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -20,9 +23,17 @@ export const HeroClient = ({ children }: HeroClientProps) => {
     },
   };
 
+  if (!isHydrated) {
+    return (
+      <div className="max-w-screen-xl w-full flex flex-col lg:flex-row items-center justify-center gap-5">
+        {children}
+      </div>
+    );
+  }
+
   return (
     <motion.div
-      className="max-w-screen-xl w-full flex flex-col md:flex-row items-center justify-between gap-5"
+      className="max-w-screen-xl w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-5"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -39,7 +50,13 @@ export const AnimatedContent = ({
   children: React.ReactNode;
   variant?: "fadeInUp" | "fadeIn";
 }) => {
+  const isHydrated = useIsHydrated();
+
   const variants = variant === "fadeInUp" ? FadeInUpVariants : FadeInVariants;
+
+  if (!isHydrated) {
+    return <div className="w-full">{children}</div>;
+  }
 
   return (
     <motion.div className="w-full" variants={variants}>
