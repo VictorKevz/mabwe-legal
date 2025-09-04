@@ -22,7 +22,7 @@ export const Services = () => {
           <ServicesAnimationWrapper>
             {services.slice(0, 6).map((service) => (
               <ServiceCardAnimation key={service.title}>
-                <article className="card px-6 pt-6 pb-4 w-full">
+                <article className="card px-6 py-8 w-full h-full shadow-xl bg-[var(--color-bg-secondary)] rounded-lg">
                   <header className="flex items-center gap-1">
                     <span className="min-h-10 min-w-10 bg-[var(--color-warning)] flex items-center justify-center text-[var(--color-text-on-primary)] rounded-md">
                       <service.icon />
